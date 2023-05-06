@@ -1,0 +1,63 @@
+## Algorithms: Coding Puzzles
+**Title:**      
+
+    Question 1: Who’s the fastest runner?
+
+**Language:**   
+                
+    Javascript
+
+**Algorithm:**  
+                        
+1. Define an array of runner objects with their speed, run time, and rest time.
+2. Define the duration of the race.
+3. Define a function to calculate the distance a runner travels in a given duration of time.
+    a. Calculate the total number of cycles the runner can complete in the duration of the race.
+    b. Calculate the distance covered in full cycles.
+    c. Calculate the remaining time the runner has and the distance covered in that time.
+    d. Add the distance covered in the full cycles and the remaining distance to get the total distance.
+    e. Return the total distance.
+4. Set the winning distance to 0.
+5. Loop through each runner in the array.
+    a. Calculate the distance the runner travels during the race using the calculateDistance function.
+    b. If the distance is greater than the current winning distance, set the winning distance to this distance.
+6. Output the winning distance.
+
+ 
+**Code:**     
+```javascript
+  const runners = [
+  { name: "John", speed: 10, runTime: 6, restTime: 20 },
+  { name: "James", speed: 8, runTime: 8, restTime: 25 },
+  { name: "Jenna", speed: 12, runTime: 5, restTime: 16 },
+  { name: "Josh", speed: 7, runTime: 7, restTime: 23 },
+  { name: "Jacob", speed: 9, runTime: 4, restTime: 32 },
+  { name: "Jerry", speed: 5, runTime: 9, restTime: 18 },
+];
+
+const raceDuration = 1234;
+
+function calculateDistance(runner, duration) {
+  const cycleTime = runner.runTime + runner.restTime;
+  const cycles = Math.floor(duration / cycleTime);
+  const remainingTime = duration % cycleTime;
+  const runDuration = Math.min(remainingTime, runner.runTime);
+  const distance = (cycles * runner.speed * runner.runTime) + (runner.speed * runDuration);
+  return distance;
+}
+
+let winningDistance = 0;
+
+for (const runner of runners) {
+  const distance = calculateDistance(runner, raceDuration);
+  if (distance > winningDistance) {
+    winningDistance = distance;
+  }
+}
+
+console.log("The winning distance is " + winningDistance + " meters.");      
+ ```
+ 
+ **Solution:** 
+ 
+   The winning distance is 3540 metres.
